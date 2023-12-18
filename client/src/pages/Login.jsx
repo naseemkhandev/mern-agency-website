@@ -1,7 +1,24 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+
 import { loginBg } from "../assets";
 
 const Login = () => {
+	const [user, setUser] = useState({
+		username: "",
+		password: "",
+	});
+
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+
+		setUser((preValue) => ({ ...preValue, [name]: value }));
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+	};
+
 	return (
 		<section
 			style={{
@@ -10,13 +27,15 @@ const Login = () => {
 				backgroundPosition: "center",
 			}}
 		>
+			{user.username}
+			{user.password}
 			<div className="flex bg-black/50 py-20 h-full flex-col items-center your justify-center your px-6 mx-auto">
 				<div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 md:w-[25rem] xl:p-0 dark:bg-gray-800 dark:border-gray-700">
 					<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
 						<h1 className="text-xl font-semibold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
 							Sign in to your account
 						</h1>
-						<form className="space-y-4 md:space-y-6" action="#">
+						<form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
 							<div>
 								<label
 									htmlFor="username"
@@ -28,6 +47,8 @@ const Login = () => {
 									type="username"
 									name="username"
 									id="username"
+									value={user.username}
+									onChange={handleChange}
 									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-slate-900 focus:border-slate-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 									placeholder="Enter your username"
 								/>
@@ -43,6 +64,8 @@ const Login = () => {
 									type="password"
 									name="password"
 									id="password"
+									value={user.password}
+									onChange={handleChange}
 									placeholder="Enter your password"
 									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-slate-900 focus:border-slate-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 								/>

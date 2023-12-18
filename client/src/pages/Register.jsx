@@ -1,7 +1,25 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+
 import { registerBg } from "../assets";
 
 const Register = () => {
+	const [user, setUser] = useState({
+		username: "",
+		email: "",
+		phone: "",
+		password: "",
+	});
+
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+
+		setUser({ ...user, [name]: value });
+	};
+	const handleSubmit = (e) => {
+		e.preventDefault();
+	};
+
 	return (
 		<section
 			style={{
@@ -16,7 +34,7 @@ const Register = () => {
 						<h1 className="text-xl font-semibold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
 							Create an account
 						</h1>
-						<form className="space-y-4 md:space-y-6" action="#">
+						<form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
 							<div>
 								<label
 									htmlFor="username"
@@ -28,6 +46,8 @@ const Register = () => {
 									type="username"
 									name="username"
 									id="username"
+									value={user.username}
+									onChange={handleChange}
 									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-slate-900 focus:border-slate-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 									placeholder="Enter your username"
 								/>
@@ -43,6 +63,8 @@ const Register = () => {
 									type="email"
 									name="email"
 									id="email"
+									value={user.email}
+									onChange={handleChange}
 									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-slate-900 focus:border-slate-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 									placeholder="Enter your email"
 								/>
@@ -55,9 +77,11 @@ const Register = () => {
 									Phone
 								</label>
 								<input
-									type="phone"
+									type="number"
 									name="phone"
 									id="phone"
+									value={user.phone}
+									onChange={handleChange}
 									placeholder="Enter your phone number"
 									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-slate-900 focus:border-slate-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 								/>
@@ -74,6 +98,8 @@ const Register = () => {
 									type="password"
 									name="password"
 									id="password"
+									value={user.password}
+									onChange={handleChange}
 									placeholder="Enter your password"
 									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-slate-900 focus:border-slate-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 								/>
