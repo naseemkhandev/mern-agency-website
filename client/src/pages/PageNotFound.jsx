@@ -20,10 +20,10 @@ const PageNotFound = () => {
 						The page you are looking for doesn&apos;t exist. Here are some
 						helpful links:
 					</p>
-					<div className="flex md:items-center flex-col md:flex-row w-full mt-6 gap-x-3 shrink-0 sm:w-auto gap-2.5">
+					<div className="flex md:items-center flex-col md:flex-row w-full mt-6 gap-x-3 shrink-0 gap-2.5">
 						<button
 							onClick={() => navigate(-1)}
-							className="flex items-center justify-center md:w-1/2 px-6 py-3 text-sm text-slate-900 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-gray-200 dark:border-slate-900 hover:bg-slate-900/5 dark:hover:bg-slate-900/5 w-full"
+							className="flex items-center justify-center md:w-1/2 px-6 py-3.5 text-sm text-slate-900 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-gray-200 dark:border-slate-900 hover:bg-slate-900/5 dark:hover:bg-slate-900/5 w-full"
 						>
 							<BsArrowLeft className="text-lg" />
 							<span>Go back</span>
@@ -31,7 +31,7 @@ const PageNotFound = () => {
 
 						<Link
 							to={"/"}
-							className="w-full md:w-1/2 px-6 py-3 text-sm tracking-wide text-white transition-colors duration-200 bg-slate-900 rounded-lg shrink-0 sm:w-auto hover:bg-slate-800"
+							className="w-full md:w-1/2 px-6 py-3.5 text-sm tracking-wide text-white transition-colors duration-200 bg-slate-900 rounded-lg shrink-0 sm:w-auto hover:bg-slate-800"
 						>
 							Take me home
 						</Link>
