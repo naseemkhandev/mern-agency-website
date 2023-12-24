@@ -47,19 +47,33 @@ const Navbar = () => {
 						>
 							<IoClose />
 						</span>
+						<div className="flex flex-col gap-2 mt-3">
+							<Link
+								to="/login"
+								className="sm:hidden text-center text-base font-medium md:font-normal py-3.5 px-5 bg-black/5 hover:bg-black/10 rounded-md"
+							>
+								Login
+							</Link>
+							<Link
+								to="/register"
+								className="sm:hidden text-center text-base font-medium md:font-normal py-3.5 px-5 bg-slate-900 hover:bg-slate-800 text-white rounded-md"
+							>
+								Register
+							</Link>
+						</div>
 					</ul>
 				</nav>
 
 				<div className="flex items-center gap-3">
 					<Link
 						to="/login"
-						className="text-sm md:text-base font-medium md:font-normal py-2.5 px-5 bg-black/5 hover:bg-black/10 rounded-md"
+						className="sm:block hidden text-center text-sm md:text-base font-medium md:font-normal py-2.5 px-5 bg-black/5 hover:bg-black/10 rounded-md"
 					>
 						Login
 					</Link>
 					<Link
 						to="/register"
-						className="text-sm md:text-base font-medium md:font-normal py-2.5 px-5 bg-slate-900 hover:bg-slate-800 text-white rounded-md"
+						className="sm:block hidden text-center text-sm md:text-base font-medium md:font-normal py-2.5 px-5 bg-slate-900 hover:bg-slate-800 text-white rounded-md"
 					>
 						Register
 					</Link>
