@@ -4,7 +4,7 @@ import { HiBuildingStorefront } from "react-icons/hi2";
 import { IoClose } from "react-icons/io5";
 import { BiMenuAltRight } from "react-icons/bi";
 
-import { navLinks } from "../../constants/NavLinks";
+import { navLinks } from "../constants/navLinks";
 
 const Navbar = () => {
 	const [menu, setMenu] = useState(false);

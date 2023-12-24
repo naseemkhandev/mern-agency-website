@@ -27,8 +27,6 @@ const Login = () => {
 				backgroundPosition: "center",
 			}}
 		>
-			{user.username}
-			{user.password}
 			<div className="flex bg-black/50 py-20 h-full flex-col items-center your justify-center your px-6 mx-auto">
 				<div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 md:w-[25rem] xl:p-0 dark:bg-gray-800 dark:border-gray-700">
 					<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
