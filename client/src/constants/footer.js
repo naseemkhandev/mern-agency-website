@@ -22,7 +22,7 @@ export const footerLinks1 = [
 	{
 		id: 5,
 		title: "terms & conditions",
-		link: "/",
+		link: "/about",
 	},
 ];
 
@@ -50,6 +50,6 @@ export const footerLinks2 = [
 	{
 		id: 5,
 		title: "privacy policy",
-		link: "/",
+		link: "/about",
 	},
 ];

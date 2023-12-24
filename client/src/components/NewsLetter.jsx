@@ -2,7 +2,7 @@ import { IoMdSend } from "react-icons/io";
 
 const Newsletter = () => {
 	return (
-		<div className="py-5 sm:py-10 relative overflow-hidden mt-20 -mb-20">
+		<div className="py-5 sm:py-10 relative overflow-hidden mt-10 md:mt-20 -mb-20">
 			<div className="container mx-auto p-7 sm:p-10 md:p-12 xl:p-14 md:rounded-lg flex flex-col lg:flex-row items-center justify-between gap-5 xl:gap-20 bg-slate-800 text-white w-full md:max-w-4xl lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl">
 				<div>
 					<h2 className="text-3xl sm:text-4xl mb-3 md:text-[2.5rem] font-semibold">

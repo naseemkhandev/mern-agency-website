@@ -3,6 +3,7 @@ import Revenue from "../components/Revenue";
 import Services from "../data/services.json";
 import ServiceCard from "../components/common/ServiceCard";
 import NewsLetter from "../components/NewsLetter";
+import Faq from "../components/Faq";
 
 const Home = () => {
 	return (
@@ -16,6 +17,7 @@ const Home = () => {
 					))}
 				</div>
 			</div>
+			<Faq />
 			<NewsLetter />
 		</div>
 	);
