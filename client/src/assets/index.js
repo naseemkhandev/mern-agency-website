@@ -7,6 +7,9 @@ import member2 from "./team/image-02.jpg";
 import member3 from "./team/image-03.jpg";
 import member4 from "./team/image-04.jpg";
 import shape from "./team/shape.svg";
+import about from "./about/about.png";
+import coding from "./about/coding.png";
+import lock from "./about/lock.png";
 
 export {
 	loginBg,
@@ -18,4 +21,7 @@ export {
 	member3,
 	member4,
 	shape,
+	about,
+	coding,
+	lock,
 };

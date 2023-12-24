@@ -9,7 +9,7 @@ import Team from "../components/Team";
 
 const Home = () => {
 	return (
-		<div>
+		<>
 			<Hero />
 			<Revenue />
 			<div className="bg-slate-400/5 py-10 md:py-16">
@@ -23,7 +23,7 @@ const Home = () => {
 			<Team />
 			<Faq />
 			<NewsLetter />
-		</div>
+		</>
 	);
 };
 
