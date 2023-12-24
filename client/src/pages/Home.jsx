@@ -5,6 +5,7 @@ import ServiceCard from "../components/common/ServiceCard";
 import NewsLetter from "../components/NewsLetter";
 import Faq from "../components/Faq";
 import Testimonials from "../components/Testimonials";
+import Team from "../components/Team";
 
 const Home = () => {
 	return (
@@ -19,6 +20,7 @@ const Home = () => {
 				</div>
 			</div>
 			<Testimonials />
+			<Team />
 			<Faq />
 			<NewsLetter />
 		</div>
