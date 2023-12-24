@@ -1,27 +1,7 @@
-import { registerBg } from "../assets";
+import ServiceCard from "../components/common/ServiceCard";
 import services from "../data/services.json";
 
-const Card = ({ img, title, desc }) => {
-	return (
-		<div className="w-full h-full">
-			<div className="rounded-[20px] h-full p-3 md:p-5 shadow-2 hover:shadow-lg bg-white dark:bg-dark-2">
-				<img
-					src={registerBg}
-					alt="service"
-					className="w-full h-64 rounded-lg"
-				/>
-				<div className="pt-5">
-					<h4 className="text-dark dark:text-white mb-[14px] text-2xl font-semibold">
-						{title}
-					</h4>
-					<p className="text-body-color dark:text-dark-6">{desc}</p>
-				</div>
-			</div>
-		</div>
-	);
-};
-
-const Services = () => {
+export const Services = () => {
 	return (
 		<section className="dark:bg-dark py-10 md:py-16">
 			<div className="flex flex-wrap">
@@ -43,7 +23,7 @@ const Services = () => {
 			<div className="bg-slate-400/5 py-10 md:py-16">
 				<div className="container mx-auto px-5 md:px-10 grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5">
 					{services.map((service) => (
-						<Card key={service.id} {...service} />
+						<ServiceCard key={service.id} {...service} />
 					))}
 				</div>
 			</div>
