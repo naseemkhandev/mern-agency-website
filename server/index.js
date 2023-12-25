@@ -3,12 +3,8 @@ const app = express();
 
 const PORT = 5000 || process.env.PORT;
 
-app.get("/", (req, res) => {
-	res.send("<h1>Backend is Running...</h1>");
-});
+const authRouter = require("./router/auth-router");
 
-app.get("/register", (req, res) => {
-	res.send("Welcome to Registration Page!!");
-});
+app.use("/api/auth", authRouter);
 
 app.listen(PORT, () => console.log(`Server is Running at Port: ${PORT}`));
