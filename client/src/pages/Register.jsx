@@ -16,6 +16,7 @@ const Register = () => {
 
 		setUser({ ...user, [name]: value });
 	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 	};
