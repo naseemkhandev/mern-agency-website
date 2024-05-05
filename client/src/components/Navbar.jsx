@@ -1,20 +1,15 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { HiBuildingStorefront } from "react-icons/hi2";
 import { IoClose } from "react-icons/io5";
 import { BiMenuAltRight } from "react-icons/bi";
 
 import { navLinks } from "../constants/navLinks";
+import LoggedInUser from "./LoggedInUser";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
   const { pathname } = useLocation();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    navigate("/login");
-  };
 
   const currentUser = localStorage.getItem("access_token");
 
@@ -77,12 +72,7 @@ const Navbar = () => {
 
         <div className="flex items-center gap-3">
           {currentUser ? (
-            <button
-              onClick={handleLogout}
-              className="text-center text-sm md:text-base font-medium md:font-normal py-2.5 px-5 bg-black/5 hover:bg-black/10 rounded-md"
-            >
-              Logout
-            </button>
+            <LoggedInUser />
           ) : (
             <>
               <Link

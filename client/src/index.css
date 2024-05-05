@@ -5,16 +5,31 @@
 *,
 html,
 body {
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
-	font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-	overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 html {
-	scroll-behavior: smooth;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 5px;
+  background-color: #e5e5e56a;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background-color: #c4c4c45e;
+}
+.no-scrollbar::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
 }
