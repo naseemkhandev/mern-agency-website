@@ -1,5 +1,6 @@
 import express from 'express';
 import userRoute from './routes/authRoute.js';
+import handleError from './middlewares/handleError.js';
 
 // Middlewares
 const app = express();
@@ -11,5 +12,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', userRoute);
+
+// Handling errors
+app.use(handleError);
 
 export default app;
