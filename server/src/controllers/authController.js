@@ -32,3 +32,26 @@ export const registerUser = async (req, res, next) => {
     next(error);
   }
 };
+
+export const loginUser = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) return next(createError(404, 'Wrong Credentials'));
+
+    const decryptedPassword = await bcrypt.compare(password, user.password);
+    if (!decryptedPassword) return next(createError(401, 'Wrong Credentials'));
+
+    const { password: userPassword, isAdmin, ...userInfo } = user._doc;
+    const access_token = generateToken(user);
+
+    res.status(200).json({
+      message: 'Login Successfull',
+      user: userInfo,
+      access_token: access_token,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
