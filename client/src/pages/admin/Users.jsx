@@ -2,7 +2,6 @@ import { FiEdit } from "react-icons/fi";
 import { FaTrashCan } from "react-icons/fa6";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 
-import data from "../../data/data?.json";
 import { selectTheme } from "../../store/slices/DarkModeSlice";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -14,7 +13,7 @@ const Users = () => {
   useEffect(() => {
     const getAllUsers = async () => {
       try {
-        const repsonse = await fetch(
+        const response = await fetch(
           `${import.meta.env.VITE_BACKEND_URL}/users`,
           {
             method: "GET",
@@ -25,8 +24,8 @@ const Users = () => {
           }
         );
 
-        if (repsonse.ok) {
-          const data = await repsonse.json();
+        if (response.ok) {
+          const data = await response.json();
           setUserData(data?.users);
         }
       } catch (error) {
@@ -36,6 +35,31 @@ const Users = () => {
 
     getAllUsers();
   }, []);
+
+  const deleteUser = async (id) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/users/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        console.log("User deleted successfully");
+      } else {
+        console.log("Failed to delete user. Response status:", response.status);
+        const responseBody = await response.text();
+        console.log("Response body:", responseBody);
+      }
+    } catch (error) {
+      console.log("Error deleting user:", error.message);
+    }
+  };
 
   const columns = ["photo", "username", "email", "phone", "Admin", "action"];
 
@@ -130,7 +154,11 @@ const Users = () => {
                     <button className="text-base p-2.5 rounded-full bg-green-500/10 text-green-500 hover:bg-green-500/20">
                       <FiEdit />
                     </button>
-                    <button className="text-base p-2.5 rounded-full bg-red-500/10 text-red-500 hover:bg-red-500/20">
+                    <button
+                      disabled={data?.isAdmin}
+                      onClick={() => deleteUser(data?._id)}
+                      className="text-base p-2.5 disabled:cursor-not-allowed disabled:opacity-50 rounded-full bg-red-500/10 text-red-500 hover:bg-red-500/20"
+                    >
                       <FaTrashCan />
                     </button>
                   </span>

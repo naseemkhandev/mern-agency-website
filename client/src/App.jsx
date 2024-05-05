@@ -15,6 +15,7 @@ import AdminLayout from "./layouts/adminLayout";
 import Users from "./pages/admin/Users";
 import AdminContact from "./pages/admin/Contact";
 import AdminServices from "./pages/admin/Services";
+import Dashboard from "./pages/admin/Dashboard";
 
 const App = () => {
   const currentUser = useSelector((state) => state.auth.user);
@@ -33,7 +34,7 @@ const App = () => {
 
         {currentUser && currentUser?.isAdmin && (
           <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<h1>Admin Dashboard</h1>} />
+            <Route index element={<Dashboard />} />
             <Route path="users" element={<Users />} />
             <Route path="contact" element={<AdminContact />} />
             <Route path="services" element={<AdminServices />} />
