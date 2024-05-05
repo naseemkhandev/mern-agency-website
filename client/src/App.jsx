@@ -12,6 +12,7 @@ import PageNotFound from "./pages/PageNotFound";
 import { useSelector } from "react-redux";
 import RootLayout from "./layouts/rootLayout";
 import AdminLayout from "./layouts/adminLayout";
+import Users from "./pages/admin/Users";
 
 const App = () => {
   const currentUser = useSelector((state) => state.auth.user);
@@ -30,7 +31,8 @@ const App = () => {
 
         {currentUser && currentUser?.isAdmin && (
           <Route path="/admin" element={<AdminLayout />}>
-            <Route index path="/admin" element={<h1>Admin Dashboard</h1>} />
+            <Route index element={<h1>Admin Dashboard</h1>} />
+            <Route path="users" element={<Users />} />
           </Route>
         )}
         <Route path="*" element={<PageNotFound />} />
