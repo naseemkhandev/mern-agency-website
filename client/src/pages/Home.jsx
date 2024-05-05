@@ -1,4 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+
 import Hero from "../components/Hero";
 import Revenue from "../components/Revenue";
 import Services from "../data/services.json";
@@ -7,37 +10,13 @@ import NewsLetter from "../components/NewsLetter";
 import Faq from "../components/Faq";
 import Testimonials from "../components/Testimonials";
 import Team from "../components/Team";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setUser } from "../store/slices/authSlice";
+import authenticateUser from "../utils/authenticateUser";
 
 const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const authenticateUser = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}/users/verify`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-            },
-          }
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          dispatch(setUser(data.user));
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    authenticateUser();
+    authenticateUser(dispatch);
   }, []);
 
   return (
