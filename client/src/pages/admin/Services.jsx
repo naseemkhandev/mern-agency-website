@@ -6,7 +6,7 @@ import data from "../../data/data.json";
 import { selectTheme } from "../../store/slices/DarkModeSlice";
 import { useSelector } from "react-redux";
 
-const Users = () => {
+const AdminServices = () => {
   const columns = ["photo", "name", "email", "gender", "role", "action"];
 
   const theme = useSelector(selectTheme);
@@ -20,7 +20,7 @@ const Users = () => {
       }`}
     >
       <div className="px-5 pb-5 border-b">
-        <h2 className="font-semibold text-lg">All Users</h2>
+        <h2 className="font-semibold text-lg">All AdminServices</h2>
       </div>
       <div className="flex flex-col gap-6 h-full overflow-auto">
         <table className="w-full select-none cursor-text text-left">
@@ -136,4 +136,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default AdminServices;
