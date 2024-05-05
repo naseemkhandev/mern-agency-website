@@ -2,12 +2,42 @@ import { FiEdit } from "react-icons/fi";
 import { FaTrashCan } from "react-icons/fa6";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 
-import data from "../../data/data.json";
+import data from "../../data/data?.json";
 import { selectTheme } from "../../store/slices/DarkModeSlice";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { LuUser2 } from "react-icons/lu";
 
 const Users = () => {
-  const columns = ["photo", "name", "email", "gender", "role", "action"];
+  const [userData, setUserData] = useState([]);
+
+  useEffect(() => {
+    const getAllUsers = async () => {
+      try {
+        const repsonse = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/users`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+          }
+        );
+
+        if (repsonse.ok) {
+          const data = await repsonse.json();
+          setUserData(data?.users);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    getAllUsers();
+  }, []);
+
+  const columns = ["photo", "username", "email", "phone", "Admin", "action"];
 
   const theme = useSelector(selectTheme);
 
@@ -33,7 +63,7 @@ const Users = () => {
                     theme !== "dark" && "text-zinc-700"
                   }`}
                 >
-                  <div className="flex items-center gap-1">
+                  <div className="flex datas-center gap-1">
                     <span>{column}</span>
                   </div>
                 </th>
@@ -42,9 +72,9 @@ const Users = () => {
           </thead>
 
           <tbody>
-            {data.users.map((item) => (
+            {userData?.map((data) => (
               <tr
-                key={item.email}
+                key={data?.email}
                 className={`w-full ${
                   theme === "dark"
                     ? "hover:bg-darkBg/50"
@@ -56,11 +86,9 @@ const Users = () => {
                     theme === "dark" ? "border-white/10" : ""
                   }`}
                 >
-                  <img
-                    src={item.photo}
-                    alt={item.name.slice(0, 10) + "..."}
-                    className="2xl:w-16 w-12 aspect-square object-cover object-top rounded-full"
-                  />
+                  <span className="text-[1.6rem] w-12 aspect-square flex items-center justify-center bg-black/5 p-2.5 rounded-full">
+                    <LuUser2 />
+                  </span>
                 </td>
 
                 <td
@@ -68,35 +96,37 @@ const Users = () => {
                     theme === "dark" ? "border-white/10" : ""
                   }`}
                 >
-                  {item.name}
+                  {data?.username}
                 </td>
                 <td
                   className={`py-1.5 pl-5 text-sm border-b ${
                     theme === "dark" ? "border-white/10" : ""
                   }`}
                 >
-                  {item.email}
+                  {data?.email}
                 </td>
                 <td
                   className={`py-1.5 pl-5 text-sm border-b capitalize ${
                     theme === "dark" ? "border-white/10" : ""
                   }`}
                 >
-                  {item.gender}
+                  {data?.phone}
                 </td>
+
                 <td
                   className={`py-1.5 pl-5 text-sm border-b capitalize ${
                     theme === "dark" ? "border-white/10" : ""
                   }`}
                 >
-                  {item.role}
+                  {data?.isAdmin ? "true" : "False"}
                 </td>
+
                 <td
                   className={`border-b px-5 ${
                     theme === "dark" ? "border-white/10" : ""
                   }`}
                 >
-                  <span className="flex items-center gap-2">
+                  <span className="flex datas-center gap-2">
                     <button className="text-base p-2.5 rounded-full bg-green-500/10 text-green-500 hover:bg-green-500/20">
                       <FiEdit />
                     </button>
@@ -110,9 +140,9 @@ const Users = () => {
           </tbody>
         </table>
 
-        <div className="flex items-center justify-center px-5 gap-2 pb-4 pt-2 select-none">
+        <div className="flex datas-center justify-center px-5 gap-2 pb-4 pt-2 select-none">
           <button
-            className={`p-2 rounded-full disabled:cursor-not-allowed cursor-pointer text-xl flex items-center justify-center text-center ${
+            className={`p-2 rounded-full disabled:cursor-not-allowed cursor-pointer text-xl flex datas-center justify-center text-center ${
               theme === "dark"
                 ? "bg-white hover:bg-white/80 disabled:bg-white/10 disabled:text-white/20 text-black"
                 : "bg-slate-300/20 hover:bg-slate-400/20 disabled:text-zinc-400/80 disabled:bg-slate-300/20 disabled:hover:bg-slate-300/20"
@@ -122,7 +152,7 @@ const Users = () => {
           </button>
           <span className="text-sm">Page 0/9</span>
           <button
-            className={`p-2 rounded-full disabled:cursor-not-allowed cursor-pointer text-xl flex items-center justify-center text-center ${
+            className={`p-2 rounded-full disabled:cursor-not-allowed cursor-pointer text-xl flex datas-center justify-center text-center ${
               theme === "dark"
                 ? "bg-white hover:bg-white/80 disabled:bg-white/10 disabled:text-white/20 text-black"
                 : "bg-slate-300/20 hover:bg-slate-400/20 disabled:text-zinc-400/80 disabled:bg-slate-300/20 disabled:hover:bg-slate-300/20"
