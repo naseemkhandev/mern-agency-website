@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { loginBg } from "../assets";
+import storeTokenInLS from "../utils/storeTokenInLS";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -32,7 +33,10 @@ const Login = () => {
       );
 
       if (response.ok) {
+        const data = await response.json();
+
         setUser({ email: "", password: "" });
+        storeTokenInLS(data.access_token);
         navigate("/");
       }
     } catch (error) {
