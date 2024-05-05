@@ -1,5 +1,7 @@
 import express from 'express';
+
 import userRoute from './routes/authRoute.js';
+import contactRoute from './routes/contactRoute.js';
 import handleError from './middlewares/handleError.js';
 
 // Middlewares
@@ -12,6 +14,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', userRoute);
+app.use('/api/contact', contactRoute);
 
 // Handling errors
 app.use(handleError);
