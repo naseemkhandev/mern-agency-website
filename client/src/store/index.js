@@ -1,15 +1,41 @@
+import authSlice from "./slices/AuthSlice";
+import sidebarSlice from "./slices/SidebarSlice";
+
 import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers } from "redux";
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  persistReducer,
+  persistStore,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-import authReducer from "./slices/authSlice";
-import DarkModeReducer from "./slices/DarkModeSlice.js";
-import SidebarReducer from "./slices/SidebarSlice.js";
+const persistConfig = {
+  key: "root",
+  storage,
+};
 
-const store = configureStore({
-  reducer: {
-    auth: authReducer,
-    theme: DarkModeReducer,
-    sidebar: SidebarReducer,
-  },
+const authReducer = persistReducer(persistConfig, authSlice);
+
+const rootReducer = combineReducers({
+  auth: authReducer,
+  sidebar: sidebarSlice,
 });
 
-export default store;
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+  devTools: import.meta.env.VITE_NODE_ENV !== "production",
+});
+
+export const persistor = persistStore(store);
