@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import LoadingBar from "react-top-loading-bar";
 
+import { useSelector } from "react-redux";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import ScrollTop from "../../components/ScrollToTop";
+import { selectTheme } from "../../store/slices/DarkModeSlice";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
-import { Outlet, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectTheme } from "../../store/slices/DarkModeSlice";
 
 const AdminLayout = () => {
+  const currentUser = useSelector((state) => state.auth.user);
   const [progress, setProgress] = useState(0);
   const { pathname } = useLocation();
 
@@ -34,7 +35,7 @@ const AdminLayout = () => {
     }, 500);
   }, [pathname]);
 
-  return (
+  return currentUser && currentUser?.isAdmin ? (
     <div
       className={`lg:pl-[17rem] 2xl:pl-72 transition-all duration-500 ${
         theme === "dark" && "bg-darkBg"
@@ -56,6 +57,8 @@ const AdminLayout = () => {
         </main>
       </div>
     </div>
+  ) : (
+    <Navigate to="/login" replace />
   );
 };
 

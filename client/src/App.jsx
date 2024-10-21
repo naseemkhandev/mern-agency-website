@@ -1,25 +1,20 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Services from "./pages/Services";
-import Contact from "./pages/Contact";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import PageNotFound from "./pages/PageNotFound";
-import { useSelector } from "react-redux";
-import RootLayout from "./layouts/rootLayout";
 import AdminLayout from "./layouts/adminLayout";
-import Users from "./pages/admin/Users";
+import RootLayout from "./layouts/rootLayout";
+import About from "./pages/About";
 import AdminContact from "./pages/admin/Contact";
-import AdminServices from "./pages/admin/Services";
 import Dashboard from "./pages/admin/Dashboard";
+import AdminServices from "./pages/admin/Services";
+import Users from "./pages/admin/Users";
+import Contact from "./pages/Contact";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import PageNotFound from "./pages/PageNotFound";
+import Register from "./pages/Register";
+import Services from "./pages/Services";
 
 const App = () => {
-  const currentUser = useSelector((state) => state.auth.user);
-
   return (
     <Router>
       <Routes>
@@ -32,14 +27,13 @@ const App = () => {
           <Route path="/register" element={<Register />} />
         </Route>
 
-        {currentUser && currentUser?.isAdmin && (
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="users" element={<Users />} />
-            <Route path="contact" element={<AdminContact />} />
-            <Route path="services" element={<AdminServices />} />
-          </Route>
-        )}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="users" element={<Users />} />
+          <Route path="contact" element={<AdminContact />} />
+          <Route path="services" element={<AdminServices />} />
+        </Route>
+
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </Router>

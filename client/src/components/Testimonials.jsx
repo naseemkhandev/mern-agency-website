@@ -6,13 +6,13 @@ import { member1, member2, member3, member4, shape } from "../assets";
 
 const Card = ({ imgSrc }) => {
 	return (
-		<div className="bg-white dark:bg-[#1a225c] p-5 lg:p-8 rounded-xl relative overflow-hidden">
+		<div className="bg-white p-5 lg:p-8 rounded-xl relative overflow-hidden">
 			<img
 				src={shape}
 				width={500}
 				height={500}
 				alt="shape"
-				className="w-full h-full absolute top-0 -right-20 opacity-30 dark:opacity-60"
+				className="w-full h-full absolute top-0 -right-20 opacity-30"
 			/>
 			<div className="flex items-center gap-3 md:gap-5">
 				<img
@@ -22,13 +22,13 @@ const Card = ({ imgSrc }) => {
 				/>
 				<div className="capitalize">
 					<h3 className="text-lg font-semibold">Naseem Khan</h3>
-					<p className="text-xs md:text-sm font-[500] text-black/70 dark:text-white/90">
+					<p className="text-xs md:text-sm font-[500] text-black/70">
 						CEO & Founder
 					</p>
 				</div>
 			</div>
 			<div className="mt-5">
-				<p className="text-xs md:text-sm font-[500] text-black/70 dark:text-white">
+				<p className="text-xs md:text-sm font-[500] text-black/70">
 					“I believe in lifelong learning and Learn. is a great place to learn
 					from experts. I&apos;ve learned a lot and recommend it to all my
 					friends and familys.”
@@ -70,7 +70,7 @@ const Card = ({ imgSrc }) => {
 
 const Testimonials = () => {
 	return (
-		<div className="py-16 md:py-20 lg:py-28 my-10 md:my-16 relative bg-[#F5F8FF] dark:bg-[#131B4D]">
+		<div className="py-16 md:py-20 lg:py-28 my-10 md:my-16 relative bg-[#F5F8FF]">
 			<div className="container mx-auto px-5 md:px-10">
 				<div className="text-center flex flex-col gap-3">
 					<h3 className="font-medium text-indigo-600">Testimonials</h3>

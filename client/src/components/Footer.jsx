@@ -11,7 +11,7 @@ import SocialIcons from "./common/SocialIcons";
 
 const Footer = () => {
 	return (
-		<div className="w-full mt-10 border-t">
+		<div className="w-full mt-28 border-t">
 			<div className="container mx-auto px-5 md:px-10 py-10">
 				<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">
 					<div className="flex flex-col gap-5 flex-1 w-full">
@@ -22,7 +22,7 @@ const Footer = () => {
 							<span className="text-lg sm:text-2xl">
 								<HiBuildingStorefront />
 							</span>
-							<span>MERN App</span>
+							<span>Agency</span>
 						</Link>
 						<p className="text-sm md:text-base">
 							Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam

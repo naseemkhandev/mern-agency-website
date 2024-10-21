@@ -1,8 +1,8 @@
-import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { BiMenuAltRight } from "react-icons/bi";
 import { HiBuildingStorefront } from "react-icons/hi2";
 import { IoClose } from "react-icons/io5";
-import { BiMenuAltRight } from "react-icons/bi";
+import { Link, useLocation } from "react-router-dom";
 
 import { navLinks } from "../constants/navLinks";
 import LoggedInUser from "./LoggedInUser";
@@ -23,7 +23,7 @@ const Navbar = () => {
           <span className="text-lg sm:text-2xl">
             <HiBuildingStorefront />
           </span>
-          <span>MERN App</span>
+          <span>Agency</span>
         </Link>
         <nav>
           <ul
