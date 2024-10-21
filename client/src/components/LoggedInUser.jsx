@@ -1,23 +1,40 @@
 import { useState } from "react";
+import toast, { LoaderIcon } from "react-hot-toast";
 import { LuLogOut, LuUser2 } from "react-icons/lu";
 import { RxDashboard } from "react-icons/rx";
-import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useLogoutMutation } from "../store/api/authApiSlice";
+import { removeUser } from "../store/slices/authSlice";
 
 const LoggedInUser = () => {
   const [showDropdow, setShowDropdow] = useState(false);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    navigate("/login");
+  const [logout, { isLoading }] = useLogoutMutation();
+
+  const handleLogout = async () => {
+    const loading = toast.loading("Loading...");
+
+    try {
+      await logout().unwrap();
+      toast.success("You have successfully logged out.");
+      dispatch(removeUser());
+    } catch (error) {
+      toast.error(error.data.message || "An error occurred");
+    } finally {
+      toast.dismiss(loading);
+    }
   };
 
   const authUser = useSelector((state) => state.auth.user);
 
   return (
     <div className="relative">
-      <button onClick={() => setShowDropdow(!showDropdow)} className="flex items-center gap-2">
+      <button
+        onClick={() => setShowDropdow(!showDropdow)}
+        className="flex items-center gap-2"
+      >
         <LuUser2 className="text-4xl bg-black/5 stroke-[1.5px] p-2 rounded-full" />
         <p className="capitalize">{authUser?.username}</p>
       </button>
@@ -36,10 +53,20 @@ const LoggedInUser = () => {
           )}
           <button
             onClick={() => (handleLogout(), setShowDropdow(!showDropdow))}
-            className="py-3.5 w-full px-4 hover:bg-black/5 rounded-md flex items-center ga-2"
+            disabled={isLoading}
+            className="py-3.5 w-full text-sm px-4 hover:bg-black/5 rounded-md flex items-center ga-2"
           >
-            <LuLogOut className="text-lg mr-2" />
-            Logout
+            {isLoading ? (
+              <>
+                <LoaderIcon className="mr-2 w-4 h-4" />
+                Loading...
+              </>
+            ) : (
+              <>
+                <LuLogOut className="text-lg mr-2" />
+                Logout
+              </>
+            )}
           </button>
         </div>
       )}
