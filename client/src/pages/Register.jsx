@@ -54,8 +54,8 @@ const Register = () => {
         backgroundPosition: "center",
       }}
     >
-      <div className="flex bg-black/50 py-20 h-full flex-col items-center your justify-center your px-6 mx-auto">
-        <div className="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0 ">
+      <div className="flex bg-black/50 py-20 h-screen flex-col items-center your justify-center your px-6 mx-auto">
+        <div className="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-lg xl:p-0 ">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-semibold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Create an account
@@ -140,7 +140,7 @@ const Register = () => {
               <p className="text-sm font-light text-gray-500">
                 Already have an account?{" "}
                 <Link
-                  to="/login"
+                  to="/auth/login"
                   className="font-medium text-slate-900 hover:underline"
                 >
                   Login here

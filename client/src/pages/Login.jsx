@@ -52,7 +52,7 @@ const Login = () => {
         backgroundPosition: "center",
       }}
     >
-      <div className="flex bg-black/50 py-20 h-full flex-col items-center your justify-center your px-6 mx-auto">
+      <div className="flex bg-black/50 py-20 h-screen flex-col items-center your justify-center your px-6 mx-auto">
         <div className="w-full bg-white rounded-lg shadow  md:mt-0 md:w-[25rem] xl:p-0 ">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-semibold leading-tight tracking-tight text-gray-900 md:text-2xl">
@@ -110,7 +110,7 @@ const Login = () => {
                   </div>
                 </div>
                 <Link
-                  to="/login"
+                  to="/auth/login"
                   className="text-sm font-medium text-slate-900 hover:underline"
                 >
                   Forgot password?
@@ -125,7 +125,7 @@ const Login = () => {
               <p className="text-sm font-light text-gray-500">
                 Don&apos;t have an account yet?{" "}
                 <Link
-                  to="/register"
+                  to="/auth/register"
                   className="font-medium text-slate-900 hover:underline"
                 >
                   Register

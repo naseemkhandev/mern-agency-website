@@ -1,6 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import AdminLayout from "./layouts/adminLayout";
+import AuthLayout from "./layouts/authLayout";
 import RootLayout from "./layouts/rootLayout";
 import About from "./pages/About";
 import AdminContact from "./pages/admin/Contact";
@@ -19,19 +20,22 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<RootLayout />}>
-          <Route index element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route index={true} path="/" element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="services" element={<Services />} />
+          <Route path="contact" element={<Contact />} />
         </Route>
 
         <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<Dashboard />} />
+          <Route index={true} element={<Dashboard />} />
           <Route path="users" element={<Users />} />
           <Route path="contact" element={<AdminContact />} />
           <Route path="services" element={<AdminServices />} />
+        </Route>
+
+        <Route path="/auth" element={<AuthLayout />}>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
         </Route>
 
         <Route path="*" element={<PageNotFound />} />

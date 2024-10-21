@@ -58,7 +58,7 @@ const AdminLayout = () => {
       </div>
     </div>
   ) : (
-    <Navigate to="/login" replace />
+    <Navigate to="/auth/login" replace />
   );
 };
 
