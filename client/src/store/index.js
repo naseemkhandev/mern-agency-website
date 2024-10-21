@@ -1,6 +1,3 @@
-import authSlice from "./slices/AuthSlice";
-import sidebarSlice from "./slices/SidebarSlice";
-
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import {
@@ -14,6 +11,10 @@ import {
   REHYDRATE,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+
+import { apiSlice } from "./api/apiSlice";
+import authSlice from "./slices/AuthSlice";
+import sidebarSlice from "./slices/SidebarSlice";
 
 const persistConfig = {
   key: "root",
@@ -34,7 +35,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(apiSlice.middleware),
   devTools: import.meta.env.VITE_NODE_ENV !== "production",
 });
 

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { LuLogOut, LuUser2 } from "react-icons/lu";
-import { Link, useNavigate } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoggedInUser = () => {
   const [showDropdow, setShowDropdow] = useState(false);
@@ -13,20 +13,18 @@ const LoggedInUser = () => {
     navigate("/login");
   };
 
-  const currentUser = useSelector((state) => state.auth.user);
+  const authUser = useSelector((state) => state.auth.user);
 
   return (
     <div className="relative">
-      <button
-        onClick={() => setShowDropdow(!showDropdow)}
-        className="text-[1.6rem] bg-black/5 p-2.5 rounded-full"
-      >
-        <LuUser2 />
+      <button onClick={() => setShowDropdow(!showDropdow)} className="flex items-center gap-2">
+        <LuUser2 className="text-4xl bg-black/5 stroke-[1.5px] p-2 rounded-full" />
+        <p className="capitalize">{authUser?.username}</p>
       </button>
 
       {showDropdow && (
         <div className="absolute top-10 right-0 bg-white w-60 shadow-lg shadow-black/10 rounded-lg p-2 z-[1]">
-          {currentUser?.isAdmin && (
+          {authUser?.isAdmin && (
             <Link
               to="/admin"
               onClick={() => setShowDropdow(!showDropdow)}

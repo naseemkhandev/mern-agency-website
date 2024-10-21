@@ -4,14 +4,14 @@ import { HiBuildingStorefront } from "react-icons/hi2";
 import { IoClose } from "react-icons/io5";
 import { Link, useLocation } from "react-router-dom";
 
+import { useSelector } from "react-redux";
 import { navLinks } from "../constants/navLinks";
 import LoggedInUser from "./LoggedInUser";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
   const { pathname } = useLocation();
-
-  const currentUser = localStorage.getItem("access_token");
+  const authUser = useSelector((state) => state.auth.user);
 
   return (
     <div className="w-full border-b py-3">
@@ -51,7 +51,7 @@ const Navbar = () => {
               <IoClose />
             </span>
 
-            {!currentUser && (
+            {!authUser && (
               <div className="flex flex-col gap-2 mt-3">
                 <Link
                   to="/auth/login"
@@ -71,7 +71,7 @@ const Navbar = () => {
         </nav>
 
         <div className="flex items-center gap-3">
-          {currentUser ? (
+          {authUser ? (
             <LoggedInUser />
           ) : (
             <>

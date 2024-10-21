@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 import { loginBg } from "../assets";
-import storeTokenInLS from "../utils/storeTokenInLS";
+import { useLoginMutation } from "../store/api/authApiSlice";
+import { setUser } from "../store/slices/authSlice";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState({
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
@@ -14,33 +18,24 @@ const Login = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setUser((preValue) => ({ ...preValue, [name]: value }));
+    setFormData((preValue) => ({ ...preValue, [name]: value }));
   };
+
+  const [login, { isLoading }] = useLoginMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const loading = toast.loading("Loading...");
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/auth/login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(user),
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-
-        setUser({ email: "", password: "" });
-        storeTokenInLS(data.access_token);
-        navigate("/");
-      }
+      const res = await login(formData).unwrap();
+      toast.success("You have successfully logged in");
+      dispatch(setUser(res.user));
+      navigate("/");
     } catch (error) {
-      console.log(error);
+      toast.error(error.data.message || "An error occurred");
+    } finally {
+      toast.dismiss(loading);
     }
   };
 
@@ -70,7 +65,7 @@ const Login = () => {
                   type="email"
                   name="email"
                   id="email"
-                  value={user.email}
+                  value={formData.email}
                   onChange={handleChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-slate-900 focus:border-slate-900 block w-full p-2.5"
                   placeholder="Enter your email"
@@ -87,7 +82,7 @@ const Login = () => {
                   type="password"
                   name="password"
                   id="password"
-                  value={user.password}
+                  value={formData.password}
                   onChange={handleChange}
                   placeholder="Enter your password"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-slate-900 focus:border-slate-900 block w-full p-2.5"
@@ -118,9 +113,10 @@ const Login = () => {
               </div>
               <button
                 type="submit"
+                disabled={isLoading}
                 className="w-full text-white bg-slate-900 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-900 font-medium rounded-lg text-sm px-5 py-3.5 text-center"
               >
-                Sign in
+                {isLoading ? "Loading..." : "Sign in"}
               </button>
               <p className="text-sm font-light text-gray-500">
                 Don&apos;t have an account yet?{" "}
